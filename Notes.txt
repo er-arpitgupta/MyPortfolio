@@ -1,0 +1,62 @@
+Notes - 
+py -m venv venv
+venv\Scripts\activate
+pip install flask
+pip install flask-wtf
+
+.flaskenv file
+FLASK_ENV=development
+FLASK_APP=main.py
+
+pip install python-dotenv - to make use of .flaskenv file
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+flask run
+
+SECRET_KEY is a special key that is used as signature key to make sure that anything you sent across the server is not been altered or hacked. Like for example when you create forms or when you set cookies, and chances are that those cookie files might have been altered. So if that's the case then it's going to use that key to check against a cookie file that was created by this application to make sure that nothing's been altered. If it's been altered then the cookie file or the session file is no longer valid and it toss that away for security reasons.
+
+
+Commands:
+pip install virtualenv
+virtualenv venv
+Set-ExecutionPolicy unrestricted [run in powershell]
+.\venv\Scripts\activate.ps1  [shortcut: type venv and press Tab key and so on]
+pip install flask [in same venv]
+python .\app.py
+
+heroku [to check heroku is istalled or not or else install and restart ide]
+heroku login
+pip install gunicorn
+pip freeze requirements.txt
+Procfile
+web:gunicorn app:app
+
+git init
+git add .
+git commit -m "Initial commmit"
+
+heroku create flask-todo-arpit
+git remote -v
+git push heroku master
+
+heroku logs --tail
+
+
+Websites:
+https://flask-todoapp-arpit.herokuapp.com/ | https://git.heroku.com/flask-todoapp-arpit.git
+
+getbootstrap.com 
+https://flask.palletsprojects.com/en/2.0.x/quickstart/
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+https://signup.heroku.com/account
+https://devcenter.heroku.com/articles/heroku-cli
+
+
+
+Note:
+If you make changes to your code, then you have to do these commands again - 
+git add .
+git commit -m ""
+git push heroku master

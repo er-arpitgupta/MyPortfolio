@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Data</title>
+    <link rel="icon" href="static/images/logo.png" type="image/icon">
+    <style>
+        table {
+            border: 1px solid black;
+        }
+        table tr th, table tr td{
+            padding: 0 5px 0 5px;
+        }
+        table tr{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+           <tr>
+               <th>Id</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Message</th>
+           </tr>
+        </thead>
+        <tbody>
+           {% for d in data %}
+            <tr>
+                <td>{{ d.id }}</td>
+                <td>{{ d.name }}</td>
+                <td>{{ d.phone }}</td>
+                <td>{{ d.mail }}</td>
+                <td>{{ d.msg }}</td>
+            </tr>
+           {% endfor %}
+        </tbody>
+     </table>
+</body>
+</html>
