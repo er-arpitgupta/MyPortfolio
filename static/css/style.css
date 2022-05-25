@@ -15,7 +15,7 @@ body {
   background: -moz-linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
   background: -webkit-linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
   background: -ms-linear-gradient(0deg, #8490ff 0%, #62bdfc 100%);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent; }
 
 ::-moz-selection {
@@ -681,6 +681,18 @@ a {
   opacity: 1;
   transition: all 1s ease;
 }
+.flash{
+   text-align: center;
+   display: block;
+   color: white;
+   background-color: green;
+   z-index: 500;
+   position: relative;
+   border-bottom-left-radius: 10px;
+   border-bottom-right-radius: 10px;
+   top: 80px;
+}
+.navbar{padding: 0px !important;}
 
 @media (max-width: 991.98px){
 	.resume-item{padding: 10px 30px 10px 30px;}
@@ -690,6 +702,43 @@ a {
   .redirect-msg{padding: 20px 35px;}
   .redirect-msg:after{right: 3em;}
   .redirect-msg:hover:after{right: 2em;}
+  .flash{top: 120px;}
 }
 
+.main-container{
+  margin-top: 200px;
+  display: flex;
+  text-align: center;
+}
+.main-container form{
+  margin-top: 20px;
+}
+.main-container form input[type="text"] {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 30px;
+  height: 40px;
+  padding-left: 10px;
+  outline: none;
+  text-align: center;
+}
+.main-container form input[type="submit"]{
+  border: 1px solid red;
+  background-color: transparent;
+  border-radius: 40px;
+  padding: 10px 20px;
+  color: white;
+  margin: 5px 40%;
+  margin-top: 20px;
+  transition: 0.5s ease;
+}
+.main-container form input[type="submit"]:hover{
+  border: 1px solid green;
+  transition: 0.5s ease;
+}
 
+.main-container div{
+  width: 50%;
+  padding: 0px 10px;
+}

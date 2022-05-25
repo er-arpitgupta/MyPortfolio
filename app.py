@@ -1,12 +1,13 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, flash, redirect, request, render_template, send_from_directory
+from os import path, listdir, remove
 from flask_sqlalchemy import SQLAlchemy
-import os
+from pytube import YouTube, Playlist
+from zipfile import ZipFile
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = "random string"
-app.config['UPLOAD_FOLDER'] = 'templates'
 db = SQLAlchemy(app)
 
 class Data(db.Model):
@@ -22,16 +23,15 @@ class Data(db.Model):
         self.mail = mail
         self.msg = msg
 
-
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        data = Data(request.form['name'], request.form['phone'],
-        request.form['mail'], request.form['msg'])
+    if request.form.get('name'):
+        data = Data(request.form.get('name'), request.form.get('phone'), request.form.get('mail'), request.form.get('msg'))
         db.session.add(data)
         db.session.commit()
-        return render_template('index.html', flag=True)
-    return render_template('index.html', flag=False)
+        flash('Message sent. Thank you for contacting us! 😇')
+        return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/feed_data', methods=['GET', 'POST'])
 def fetch():
@@ -39,9 +39,37 @@ def fetch():
 
 @app.route('/download/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
-    full_path = os.path.join(app.root_path, app.config['UPLOAD_FOLDER'])
-    return send_from_directory(full_path, filename)
+    return send_from_directory('data/', filename)
 
+@app.route('/ytd', methods=['GET', 'POST'])
+def youtube():
+    if request.form.get('link'):
+        if 'list=PL' in request.form.get('link'):
+            try:
+                urls = Playlist(request.form.get('link')).video_urls
+                for url in urls: 
+                    YouTube(str(url)).streams.get_lowest_resolution().download('data/')
+            except: 
+                flash('Playlist not found')
+                return render_template('youtube.html', flag=False)
+        else: 
+            try: YouTube(str(request.form.get('link'))).streams.get_highest_resolution().download('data/')
+            except: 
+                flash('Video not found')
+                return render_template('youtube.html', flag=False)
+            flag1 = True
+        files = listdir('data/')
+        if 'videos.zip' in files: remove('data/videos.zip')
+            
+        with ZipFile('data/videos.zip', 'w') as f:
+            for file in files: 
+                if file!='videos.zip' and file!='Arpit_CV.pdf': f.write('data/'+file)
+
+        for file in files: 
+            if file!='Arpit_CV.pdf' and file!='videos.zip': remove('data/'+str(file))
+
+        return render_template('youtube.html', flag=True)
+    return render_template('youtube.html')
 
 if __name__ == '__main__':
     db.create_all()

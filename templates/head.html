@@ -1,0 +1,18 @@
+<section class="site-hero" style="background-image: url(static/images/img1.jpg); top:-80px;" data-stellar-background-ratio="0.5">
+	<div class="container">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<span class="flash">{{ message }}</span>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+
+		<div class="row intro-text align-items-center justify-content-center">
+			<div class="col-md-10 text-center pt-5">
+				<h1 class="site-heading site-animate">Hello, I'm <strong class="d-block">Arpit Gupta</strong></h1>
+				<strong class="d-block text-white text-uppercase letter-spacing">and I'm &#10094;coder/&#10095;</strong>
+			</div>
+		</div>
+	</div>
+</section> 
