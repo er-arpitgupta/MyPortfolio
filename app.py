@@ -1,5 +1,5 @@
-from flask import Flask, flash, redirect, request, render_template, send_from_directory
-from os import path, listdir, remove
+from flask import Flask, flash, request, render_template, send_from_directory
+from os import listdir, remove
 from flask_sqlalchemy import SQLAlchemy
 from pytube import YouTube, Playlist
 from zipfile import ZipFile
