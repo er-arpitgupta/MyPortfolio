@@ -1,4 +1,4 @@
-from flask import Flask, flash, request, render_template, send_from_directory
+from flask import Flask, flash, redirect, request, render_template, send_from_directory
 from os import listdir, remove
 from flask_sqlalchemy import SQLAlchemy
 from pytube import YouTube, Playlist
@@ -69,7 +69,7 @@ def youtube():
             if file!='Arpit_CV.pdf' and file!='videos.zip': remove('data/'+str(file))
 
         return render_template('youtube.html', flag=True)
-    return render_template('youtube.html')
+    return redirect('/')
 
 if __name__ == '__main__':
     db.create_all()
